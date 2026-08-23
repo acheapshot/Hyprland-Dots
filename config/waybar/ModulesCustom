@@ -319,5 +319,12 @@
 "custom/arrow10": {
 	"format": "",
 	"tooltip": false
-}
+},
+"custom/active_workspace": {
+	"exec": "$HOME/.config/waybar/scripts/active-workspace.sh",
+	"interval": 1,
+	"format": "{}",
+	"tooltip": false,
+	"on-click": "hyprctl dispatch global quickshell:overviewToggle",
+},
 }
