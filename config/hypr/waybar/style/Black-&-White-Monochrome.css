@@ -47,8 +47,8 @@ tooltip label {
   border-radius: 10px;
   padding-top: 2px;
   padding-bottom: 2px;
-  padding-right: 4px;
-  padding-left: 4px;
+  padding-right: 2px;
+  padding-left: 2px;
 }
 .modules-center {
   background-color: black;
@@ -59,8 +59,8 @@ tooltip label {
   border-radius: 10px;
   padding-top: 2px;
   padding-bottom: 2px;
-  padding-right: 4px;
-  padding-left: 4px;
+  padding-right: 2px;
+  padding-left: 2px;
 }
 .modules-left {
   background-color: black;
@@ -71,8 +71,8 @@ tooltip label {
   border-radius: 10px;
   padding-top: 2px;
   padding-bottom: 2px;
-  padding-right: 4px;
-  padding-left: 4px;
+  padding-right: 2px;
+  padding-left: 2px;
 }
 /*-----modules indv----*/
 #taskbar button,
@@ -134,7 +134,6 @@ tooltip label {
 #wireplumber,
 #workspaces,
 #custom-backlight,
-#custom-nightlight,
 #custom-browser,
 #custom-cava_mviz,
 #custom-cycle_wall,
@@ -143,7 +142,6 @@ tooltip label {
 #custom-keybinds,
 #custom-keyboard,
 #custom-light_dark,
-#custom-nightlight,
 #custom-lock,
 #custom-hint,
 #custom-hypridle,
@@ -174,14 +172,13 @@ tooltip label {
 #custom-weather.sunnyDay {
   padding-top: 4px;
   padding-bottom: 4px;
-  padding-right: 6px;
-  padding-left: 6px;
+  padding-right: 4px;
+  padding-left: 4px;
 }
 /*-----Indicators----*/
 #custom-hypridle.notactive,
 #idle_inhibitor.activated {
   color: #39ff14;
-  border-top: 8px solid rgba(0, 0, 0, 0.2);
 }
 
 #pulseaudio.muted {
@@ -227,6 +224,22 @@ tooltip label {
 #pulseaudio-slider highlight {
   min-height: 10px;
   border-radius: 5px;
+}
+
+#custom-claude-usage {
+  padding: 0 4px;
+}
+
+#custom-claude-usage.warning {
+  color: #f9e2af; /* amber */
+}
+
+#custom-claude-usage.critical {
+  color: #f38ba8; /* red */
+}
+
+#custom-claude-usage.error {
+  color: #6c7086; /* dim gray */
 }
 
 /* --- tray readability override (global) --- */

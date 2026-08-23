@@ -37,6 +37,7 @@
 ],
 
 "modules-right": [
+	"custom/claude-usage",
 	"mpris",
 	"tray",
 	"group/notify",
@@ -47,4 +48,12 @@
 	"custom/power_vertical",
 	"custom/menu",
 ],
+
+"custom/claude-usage": {
+    "exec": "~/.config/waybar/scripts/claude-usage.sh",
+    "return-type": "json",
+    "interval": 300,       // poll every 5 min - no need to hammer it
+    "on-click": "xdg-open https://claude.ai/settings/usage",
+    "tooltip": true
+}
 }
