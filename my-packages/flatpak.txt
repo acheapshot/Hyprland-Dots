@@ -1,0 +1,3 @@
+com.obsproject.Studio
+org.gimp.GIMP
+org.kde.kdenlive
