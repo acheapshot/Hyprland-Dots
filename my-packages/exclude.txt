@@ -1,0 +1,12 @@
+# Package names to leave out of pacman.txt / aur.txt / flatpak.txt when
+# export.sh runs, and to skip if they end up in those files anyway when
+# install.sh runs. One exact package/app-id name per line. Comments (#)
+# and blank lines are ignored.
+#
+# Meant for actual games (Steam/Lutris/Flathub library entries etc.) -
+# those are picked and installed by hand instead of via this list.
+# The launchers/compat layers themselves (steam, lutris, wine,
+# proton-ge-custom-bin, ...) are intentionally NOT excluded here.
+#
+# Example:
+# minecraft-launcher
