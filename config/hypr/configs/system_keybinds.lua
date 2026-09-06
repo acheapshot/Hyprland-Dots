@@ -531,7 +531,7 @@ bind(
 bind(
   "CTRL ALT",
   "W",
-  exec_cmd("$HOME/.config/hypr/UserScripts/WallpaperRandom.sh"),
+  exec_cmd("$HOME/.config/hypr/scripts/WallpaperRandom.sh"),
   { description = "random wallpaper" }
 )
 bind("SUPER CTRL", "O", exec_cmd("$HOME/.config/hypr/scripts/ToggleOpacity.sh"), { description = "toggle active window opacity" })
