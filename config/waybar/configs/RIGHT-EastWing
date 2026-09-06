@@ -37,7 +37,12 @@
 
 "modules-right": [
 	"custom/claude-usage",
-	"mpris",
+	// "mpris" disabled: playerctld (2.4.1-5.1) gets stuck in an instant
+	// NameAcquired/NameLost crash-loop on its own D-Bus name, which
+	// starves waybar's frame clock and leaves the ENTIRE bar unrendered
+	// (layer surface registers, reserved zone claims space, but nothing
+	// ever paints - confirmed via bisection, not a CSS/config issue).
+	// Re-enable once playerctld's bug is fixed upstream or reproduced root cause found.
 	"tray",
 	"group/notify",
 	"backlight#vertical",
