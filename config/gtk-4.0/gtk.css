@@ -1,0 +1,8 @@
+/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
+/*
+ * Wallpaper-driven GTK4/libadwaita colors. wallust regenerates
+ * wallust/colors-gtk.css on every wallpaper change (see WallustSwww.sh) -
+ * this file just imports it. Not itself managed by wallust: add your own
+ * overrides below the import.
+ */
+@import url("wallust/colors-gtk.css");
