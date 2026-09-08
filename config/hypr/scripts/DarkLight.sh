@@ -415,8 +415,30 @@ set_custom_gtk_theme() {
         fi
     done
 
+    # adw-gtk3 (and its -dark variant) is the only GTK3 theme in this setup that
+    # defines its stylesheet entirely in overridable named colors, so it's the
+    # only one wallust's colors-gtk.css template can actually recolor to match
+    # the wallpaper. Prefer it deterministically over the random theme pool so
+    # apps like Thunar reliably follow the wallpaper instead of only doing so
+    # on the toggles where a recolorable theme happens to get picked.
+    local adw_theme_name=""
+    if [ "$mode" == "Light" ]; then
+        adw_theme_name="adw-gtk3"
+    else
+        adw_theme_name="adw-gtk3-dark"
+    fi
+    local has_adw_theme=0
+    for dir in "${theme_search_dirs[@]}"; do
+        if [ -d "$dir/$adw_theme_name" ]; then
+            has_adw_theme=1
+            break
+        fi
+    done
+
     local selected_theme=""
-    if [ ${#themes[@]} -gt 0 ]; then
+    if [ "$has_adw_theme" -eq 1 ]; then
+        selected_theme="$adw_theme_name"
+    elif [ ${#themes[@]} -gt 0 ]; then
         selected_theme=${themes[RANDOM % ${#themes[@]}]}
     else
         if [ "$mode" == "Dark" ]; then

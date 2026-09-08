@@ -1,0 +1,9 @@
+/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
+/*
+ * Wallpaper-driven GTK3 colors. wallust regenerates wallust/colors-gtk.css
+ * on every wallpaper change (see WallustSwww.sh) - this file just imports
+ * it so it applies on top of whatever GTK3 theme is active (adw-gtk3 /
+ * adw-gtk3-dark). It is not itself managed by wallust: add your own
+ * overrides below the import.
+ */
+@import url("wallust/colors-gtk.css");

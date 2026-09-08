@@ -1,0 +1,48 @@
+/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
+/* wallust template - colors-gtk */
+/*
+ * GTK3/4 named-color overrides, generated from the current wallpaper palette.
+ * Targets adw-gtk3 / adw-gtk3-dark (and libadwaita GTK4 apps), which define
+ * their whole stylesheet in terms of these @define-color names. Anything
+ * NOT redefined here (buttons, switches, destructive/red actions, etc.)
+ * keeps deriving from these via the theme's own mix()/shade() rules, so we
+ * only need to override the base surfaces + accent.
+ *
+ * Imported by gtk-3.0/gtk.css and gtk-4.0/gtk.css - see WallustSwww.sh for
+ * the reload hook that makes Thunar (and other GTK apps) pick this up.
+ */
+
+@define-color accent_bg_color {{color12}};
+@define-color accent_color {{color13}};
+
+@define-color window_bg_color {{background}};
+@define-color window_fg_color {{foreground}};
+@define-color view_bg_color {{background}};
+@define-color view_fg_color {{foreground}};
+
+@define-color headerbar_bg_color mix({{background}}, {{foreground}}, 0.06);
+@define-color headerbar_fg_color {{foreground}};
+@define-color headerbar_border_color {{foreground}};
+@define-color headerbar_backdrop_color {{background}};
+
+@define-color sidebar_bg_color mix({{background}}, {{foreground}}, 0.05);
+@define-color sidebar_fg_color {{foreground}};
+@define-color sidebar_backdrop_color {{background}};
+
+@define-color dialog_bg_color mix({{background}}, {{foreground}}, 0.10);
+@define-color dialog_fg_color {{foreground}};
+@define-color popover_bg_color mix({{background}}, {{foreground}}, 0.10);
+@define-color popover_fg_color {{foreground}};
+
+@define-color card_bg_color alpha({{foreground}}, 0.06);
+@define-color card_fg_color {{foreground}};
+
+@define-color thumbnail_bg_color mix({{background}}, {{foreground}}, 0.06);
+@define-color thumbnail_fg_color {{foreground}};
+
+@define-color panel_bg_color {{background}};
+@define-color panel_fg_color {{foreground}};
+
+@define-color borders alpha({{foreground}}, 0.15);
+@define-color unfocused_borders alpha({{foreground}}, 0.1);
+@define-color scrollbar_outline_color alpha({{background}}, 0.9);
