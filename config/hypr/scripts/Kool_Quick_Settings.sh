@@ -115,7 +115,7 @@ is_tui_editor() {
   base="$(basename "$bin")"
 
   case "$base" in
-  vi | vim | nvim | nano | hx | helix | kak | micro | emacs-nox)
+  vi | vim | nvim | nano | hx | helix | kak | micro | emacs-nox | fresh)
     return 0
     ;;
   emacs | emacsclient)
