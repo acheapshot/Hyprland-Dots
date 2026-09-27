@@ -40,7 +40,7 @@ local startup_commands = {
   -- Personal customization: random wallpaper per monitor on every login instead of
   -- restoring the previous session's (WallpaperDaemon.sh). Wallust theming follows
   -- $WALLPAPER_THEME_MONITOR (default DP-3); see WallpaperRandomLogin.sh.
-  "sleep 1; $HOME/.config/hypr/scripts/WallpaperRandomLogin.sh && $HOME/.config/hypr/scripts/WaybarStartup.sh",
+  "sleep 1; $HOME/.config/hypr/scripts/WallpaperRandomLogin.sh; $HOME/.config/hypr/scripts/WaybarStartup.sh",
   "$HOME/.config/hypr/initial-boot.sh",
   "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP WEATHER_UNITS KITTY_CONFIG_DIRECTORY",
   "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP WEATHER_UNITS KITTY_CONFIG_DIRECTORY",
