@@ -37,7 +37,6 @@
 ],
 
 "modules-right": [
-	"custom/claude-usage",
 	// "mpris" disabled: playerctld (2.4.1-5.1) gets stuck in an instant
 	// NameAcquired/NameLost crash-loop on its own D-Bus name, which
 	// starves waybar's frame clock and leaves the ENTIRE bar unrendered
@@ -54,11 +53,4 @@
 	"custom/menu",
 ],
 
-"custom/claude-usage": {
-    "exec": "~/.config/hypr/waybar/scripts/claude-usage.sh",
-    "return-type": "json",
-    "interval": 300,       // poll every 5 min - no need to hammer it
-    "on-click": "xdg-open https://claude.ai/settings/usage",
-    "tooltip": true
-}
 }
