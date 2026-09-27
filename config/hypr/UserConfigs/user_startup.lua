@@ -89,6 +89,9 @@ local exec_once = user_startup_helper.exec_once
 
 -- Add custom startup commands:
 local startup_commands = {
+  -- Sunshine starts via systemd --user before WAYLAND_DISPLAY is imported, so it boots with no
+  -- display/encoder. exec_once runs commands in parallel, so import here ourselves before restarting.
+  "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user restart sunshine.service",
   -- "kdeconnect-app",
   -- "blueman-applet",
   -- "$HOME/.config/hypr/UserScripts/RainbowBorders.sh",
