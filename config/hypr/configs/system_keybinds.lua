@@ -921,30 +921,13 @@ bind("SUPER SHIFT", "Tab", dispatch("changegroupactive", "b"), { description = "
 bind("SUPER CTRL", "J", dispatch("moveintogroup", "l"), { description = "Move left into group" })
 bind("SUPER CTRL", "L", dispatch("moveintogroup", "r"), { description = "Move Right into group" })
 bind("SUPER CTRL", "H", dispatch("moveoutofgroup", ""), { description = "Move active out of group" })
-bind(
-  "SUPER",
-  "left",
-  exec_cmd("$HOME/.config/hypr/scripts/LayoutKeybindDispatch.sh focus-left"),
-  { description = "focus left (layout-aware)" }
-)
-bind(
-  "SUPER",
-  "right",
-  exec_cmd("$HOME/.config/hypr/scripts/LayoutKeybindDispatch.sh focus-right"),
-  { description = "focus right (layout-aware)" }
-)
-bind(
-  "SUPER",
-  "up",
-  exec_cmd("$HOME/.config/hypr/scripts/LayoutKeybindDispatch.sh focus-up"),
-  { description = "focus up (layout-aware)" }
-)
-bind(
-  "SUPER",
-  "down",
-  exec_cmd("$HOME/.config/hypr/scripts/LayoutKeybindDispatch.sh focus-down"),
-  { description = "focus down (layout-aware)" }
-)
+-- Plain movefocus instead of LayoutKeybindDispatch.sh (layout-aware cycleprev/cyclenext):
+-- under dwindle/monocle the dispatcher never falls through to an adjacent monitor,
+-- breaking Super+Arrow monitor switching. movefocus keeps that native behavior.
+bind("SUPER", "left", dispatch("movefocus", "l"), { description = "focus left" })
+bind("SUPER", "right", dispatch("movefocus", "r"), { description = "focus right" })
+bind("SUPER", "up", dispatch("movefocus", "u"), { description = "focus up" })
+bind("SUPER", "down", dispatch("movefocus", "d"), { description = "focus down" })
 bind("SUPER", "tab", dispatch("workspace", "m+1"), { description = "next workspace" })
 bind("SUPER SHIFT", "tab", dispatch("workspace", "m-1"), { description = "previous workspace" })
 local qs_hyprview_layout = "smartgrid"
