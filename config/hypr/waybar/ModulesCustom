@@ -321,7 +321,7 @@
 	"tooltip": false
 },
 "custom/active_workspace": {
-	"exec": "$HOME/.config/waybar/scripts/active-workspace.sh",
+	"exec": "$HOME/.config/hypr/waybar/scripts/active-workspace.sh",
 	"interval": 1,
 	"format": "{}",
 	"tooltip": false,
