@@ -649,6 +649,16 @@ apply_window_rule({
   center = true,
 })
 
+-- Ignore client maximize requests (kitty etc. ask on map); otherwise each new
+-- window opens maximized over the tiled layout instead of splitting.
+apply_window_rule({
+  name = "suppress-maximize-all",
+  match = {
+    class = ".*",
+  },
+  suppress_event = "maximize",
+})
+
 apply_window_rule({
   name = "idle-inhibit-fullscreen-bool",
   match = {
