@@ -226,22 +226,6 @@ tooltip label {
   border-radius: 5px;
 }
 
-#custom-claude-usage {
-  padding: 0 4px;
-}
-
-#custom-claude-usage.warning {
-  color: #f9e2af; /* amber */
-}
-
-#custom-claude-usage.critical {
-  color: #f38ba8; /* red */
-}
-
-#custom-claude-usage.error {
-  color: #6c7086; /* dim gray */
-}
-
 /*-----Submap indicator (visible only while a submap is active)----*/
 #submap {
   margin-right: 8px;
