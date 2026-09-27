@@ -64,6 +64,13 @@ hl.config({
 -- })
 --
 
+-- Keep cursor warping enabled (upstream default in lua/settings.lua is no_warps = true)
+hl.config({
+  cursor = {
+    no_warps = false,
+  },
+})
+
 -- Disable cursor being centered when swap workspaces
 --
 -- hl.config({
