@@ -22,7 +22,7 @@
 "ipc": true,
 
 "modules-left": [
-	"custom/menu",
+	"custom/menu#dank",
 	"hyprland/workspaces#dank",
 	"hyprland/submap",
 ],
@@ -35,7 +35,7 @@
 	// "mpris" disabled: playerctld crash-loop hides the entire bar (see RIGHT-EastWing)
 	"tray",
 	"group/dank-controls",
-	"group/notify",
+	"group/dank-notify",
 	"custom/power_vertical",
 ],
 
@@ -79,6 +79,58 @@
 		"pulseaudio#microphone_vertical",
 		"pulseaudio#vertical",
 	]
+},
+
+// Same as the stock modules, minus the padding spaces that
+// forced every island wider
+"custom/menu#dank": {
+	"format": "",
+	"on-click": "rofi_dir=\"$HOME/.config/hypr/rofi\"; [ ! -d \"$rofi_dir\" ] && rofi_dir=\"$HOME/.config/rofi\"; pkill rofi || true; $HOME/.config/hypr/scripts/RofiFocusedWallpaperLink.sh >/dev/null 2>&1 || true; rofi -show drun -modi run,drun,filebrowser,window -config \"$rofi_dir/config.rasi\"",
+	"on-click-middle": "$HOME/.config/hypr/UserScripts/WallpaperSelect.sh",
+	"on-click-right": "$HOME/.config/hypr/scripts/WaybarLayout.sh",
+	"tooltip": true,
+	"tooltip-format": "Left Click: Rofi Menu\nMiddle Click: Wallpaper Menu\nRight Click: Waybar Layout Menu",
+},
+
+"group/dank-notify": {
+	"orientation": "inherit",
+	"drawer": {
+		"transition-duration": 500,
+		"children-class": "custom/swaync",
+		"transition-left-to-right": false
+	},
+	"modules": [
+		"custom/swaync#dank",
+		"custom/dot_update#dank",
+	]
+},
+"custom/swaync#dank": {
+	"tooltip": true,
+	"tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
+	"format": "{icon}",
+	"format-icons": {
+		"notification": "<span foreground='red'><sup></sup></span>",
+		"none": "",
+		"dnd-notification": "<span foreground='red'><sup></sup></span>",
+		"dnd-none": "",
+		"inhibited-notification": "<span foreground='red'><sup></sup></span>",
+		"inhibited-none": "",
+		"dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+		"dnd-inhibited-none": ""
+	},
+	"return-type": "json",
+	"exec-if": "which swaync-client",
+	"exec": "swaync-client -swb",
+	"on-click": "sleep 0.1 && swaync-client -t -sw",
+	"on-click-right": "swaync-client -d -sw",
+	"escape": true,
+},
+
+"custom/dot_update#dank": {
+	"format": "󰁈",
+	"on-click": "$HOME/.config/hypr/scripts/KooLsDotsUpdate.sh",
+	"tooltip": true,
+	"tooltip-format": "Check KooL Dots update\nIf available",
 },
 
 }
