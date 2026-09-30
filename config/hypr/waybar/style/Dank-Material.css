@@ -47,12 +47,14 @@ tooltip label {
 #clock,
 #tray,
 #dank-controls,
-#notify,
+#dank-notify,
 #custom-power_vertical {
   background-color: alpha(@background, 0.85);
   border: 1px solid alpha(@foreground, 0.08);
   border-radius: 14px;
   padding: 6px 2px;
+  /* keep a small gap between the islands and tiled windows */
+  margin-left: 4px;
 }
 
 /* Launcher: round button like DMS's app-drawer icon */
@@ -70,7 +72,7 @@ tooltip label {
   min-width: 8px;
   min-height: 8px;
   padding: 0px;
-  margin: 4px 14px;
+  margin: 4px 12px;
   border-radius: 8px;
   border: none;
   box-shadow: none;
