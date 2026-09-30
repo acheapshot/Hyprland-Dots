@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 256 256">
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g fill="none" stroke-linecap="square" stroke-linejoin="miter" filter="url(#glow)"><path d="M60 28 H200 L228 56 V196 L196 228 H56 L28 200 V60 Z" stroke="#ff2a6d" stroke-width="4"/><path d="M100 28 V36" stroke="#ff2a6d" stroke-width="3"/><path d="M114 28 V36" stroke="#ff2a6d" stroke-width="3"/><path d="M142 28 V36" stroke="#ff2a6d" stroke-width="3"/><path d="M156 28 V36" stroke="#ff2a6d" stroke-width="3"/><path d="M100 220 V228" stroke="#ff2a6d" stroke-width="3"/><path d="M114 220 V228" stroke="#ff2a6d" stroke-width="3"/><path d="M142 220 V228" stroke="#ff2a6d" stroke-width="3"/><path d="M156 220 V228" stroke="#ff2a6d" stroke-width="3"/><path d="M16 44 V16 H44" stroke="#b44cff" stroke-width="4"/><path d="M212 240 H240 V212" stroke="#b44cff" stroke-width="4"/><path d="M96 16 H160" stroke="#b44cff" stroke-width="4"/><path d="M96 240 H160" stroke="#b44cff" stroke-width="4"/><path d="M148 76 H84 V180 H148" stroke="#2e8bff" stroke-width="10"/><path d="M108 128 H194" stroke="#2e8bff" stroke-width="10"/><path d="M178.7 140.9 L194.0 128.0 L178.7 115.1" stroke="#2e8bff" stroke-width="10"/></g>
+</svg>
