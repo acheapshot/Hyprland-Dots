@@ -1,0 +1,84 @@
+/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
+
+// ### RIGHT PANEL - DankMaterialShell look ### //
+// Pair with style/Dank-Material.css
+
+{
+"include": [
+  "$HOME/.config/hypr/waybar/Modules",
+  "$HOME/.config/hypr/waybar/ModulesWorkspaces",
+  "$HOME/.config/hypr/waybar/ModulesCustom",
+  "$HOME/.config/hypr/waybar/ModulesGroups",
+  "$HOME/.config/hypr/waybar/UserModules",
+  "$HOME/.config/hypr/waybar/ModulesVertical",
+  ],
+"layer": "top",
+"position": "right",
+"margin-top": 8,
+"margin-bottom": 8,
+"margin-right": 1,
+"spacing": 6,
+"fixed-center": true,
+"ipc": true,
+
+"modules-left": [
+	"custom/menu",
+	"hyprland/workspaces#dank",
+	"hyprland/submap",
+],
+
+"modules-center": [
+	"clock#dank",
+],
+
+"modules-right": [
+	// "mpris" disabled: playerctld crash-loop hides the entire bar (see RIGHT-EastWing)
+	"tray",
+	"group/dank-controls",
+	"group/notify",
+	"custom/power_vertical",
+],
+
+// Workspaces as pills: dots, active one stretched tall
+"hyprland/workspaces#dank": {
+	"active-only": false,
+	"all-outputs": true,
+	"format": "",
+	"show-special": false,
+	"on-click": "activate",
+	"on-scroll-up": "hyprctl dispatch workspace e+1",
+	"on-scroll-down": "hyprctl dispatch workspace e-1",
+	"persistent-workspaces": {
+		"*": 5
+	},
+},
+
+// Stacked hour / minute
+"clock#dank": {
+	"format": "{:%H\n%M}",
+	"interval": 10,
+	"tooltip": true,
+	"tooltip-format": "<big>{:%A, %d %B %Y}</big>\n\n{calendar}",
+	"calendar": {
+		"mode": "month",
+		"format": {
+			"today": "<span color='#0dbc79'><b>{}</b></span>",
+		}
+	}
+},
+
+// Control-center style pill: all quick toggles in one group
+"group/dank-controls": {
+	"orientation": "inherit",
+	"modules": [
+		"custom/hypr_layout",
+		"custom/light_dark",
+		"idle_inhibitor",
+		"custom/nightlight",
+		"backlight#vertical",
+		"pulseaudio#microphone_vertical",
+		"pulseaudio#vertical",
+	]
+},
+
+}
