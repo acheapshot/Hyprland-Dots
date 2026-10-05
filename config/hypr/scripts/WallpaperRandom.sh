@@ -86,12 +86,17 @@ for monitor in "${MONITORS[@]}"; do
   pool_idx=$((pool_idx + 1))
   ASSIGNED["$monitor"]="$pic"
 
-  wallpaper_base="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/wallpaper_effects/.wallpaper_base_${monitor}"
+  per_monitor_wallpaper_current="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/wallpaper_effects/.wallpaper_current_${monitor}"
+  per_monitor_wallpaper_link="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/rofi/.current_wallpaper_${monitor}"
+  per_monitor_wallpaper_base="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/wallpaper_effects/.wallpaper_base_${monitor}"
   resize_mode="$(wallpaper_resize_mode "$pic" "$monitor")"
   "$WWW_CMD" img -o "$monitor" --resize "$resize_mode" "$pic" "${SWWW_PARAMS[@]}"
 
-  mkdir -p "$(dirname "$wallpaper_base")"
-  cp -f "$pic" "$wallpaper_base" || true
+  # Persist per-monitor state so WallpaperDaemon.sh restores this pick on resume
+  mkdir -p "$(dirname "$per_monitor_wallpaper_current")" "$(dirname "$per_monitor_wallpaper_link")"
+  ln -sf "$pic" "$per_monitor_wallpaper_link" || true
+  cp -f "$pic" "$per_monitor_wallpaper_current" || true
+  cp -f "$pic" "$per_monitor_wallpaper_base" || true
 
   if [ "$monitor" = "$THEME_MONITOR" ]; then
     theme_wallpaper="$pic"
@@ -104,6 +109,8 @@ if [ -z "$theme_wallpaper" ]; then
   focused_monitor="$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')"
   theme_wallpaper="${ASSIGNED[$focused_monitor]:-${ASSIGNED[${MONITORS[0]}]}}"
 fi
+
+"$SCRIPTSDIR/RofiFocusedWallpaperLink.sh" >/dev/null 2>&1 || true
 
 if ! "$SCRIPTSDIR/WallustSwww.sh" "$theme_wallpaper"; then
   notify-send -u critical "Wallust failed" "Wallpaper theme not refreshed"

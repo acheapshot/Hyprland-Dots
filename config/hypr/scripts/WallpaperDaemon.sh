@@ -148,14 +148,18 @@ apply_wallpaper_for_monitor() {
   return 1
 }
 
+# Theme from $WALLPAPER_THEME_MONITOR (same as WallpaperRandom*.sh), else the first monitor
+THEME_MONITOR="${WALLPAPER_THEME_MONITOR:-DP-3}"
 applied_wallpaper=""
+theme_wallpaper=""
 while read -r monitor; do
   [ -n "$monitor" ] || continue
   applied_path="$(apply_wallpaper_for_monitor "$monitor" || true)"
-  if [ -z "$applied_wallpaper" ] && [ -n "$applied_path" ] && [ -f "$applied_path" ]; then
-    applied_wallpaper="$applied_path"
-  fi
+  [ -n "$applied_path" ] && [ -f "$applied_path" ] || continue
+  [ -n "$applied_wallpaper" ] || applied_wallpaper="$applied_path"
+  [ "$monitor" = "$THEME_MONITOR" ] && theme_wallpaper="$applied_path"
 done < <(wait_for_monitors || true)
+[ -n "$theme_wallpaper" ] && applied_wallpaper="$theme_wallpaper"
 
 "$SCRIPTSDIR/RofiFocusedWallpaperLink.sh" >/dev/null 2>&1 || true
 
