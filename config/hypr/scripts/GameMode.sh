@@ -12,6 +12,12 @@ SCRIPTSDIR="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/scripts"
 # shellcheck source=/dev/null
 . "$SCRIPTSDIR/WallpaperCmd.sh"
 
+# Optional user hook, called with "on" or "off" (e.g. to stop GPU-heavy daemons)
+HOOK="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/UserScripts/GameModeHook.sh"
+run_hook() {
+    [[ -x "$HOOK" ]] && "$HOOK" "$1"
+}
+
 # Check if animations are currently enabled
 HYPRGAMEMODE=$(hyprctl getoption animations:enabled -j | jq -r '.bool' 2>/dev/null)
 if [[ "$HYPRGAMEMODE" == "null" || -z "$HYPRGAMEMODE" ]]; then
@@ -28,12 +34,14 @@ if [ "$HYPRGAMEMODE" = "true" ] || [ "$HYPRGAMEMODE" = "1" ] ; then
     hyprctl eval "hl.window_rule({ name = 'gamemode-opacity', match = { class = '.*' }, opacity = 1.0 })"
     
     "$WWW_CMD" kill 
+    run_hook on
     notify-send -e -u low -i "$notif" " Gamemode:" " enabled"
     sleep 0.1
     exit
 else
     # DISABLE Game Mode (Restore animations/decorations)
     hyprctl reload
+    run_hook off
 
     # Restore wallpaper using the official daemon script
     if [[ -x "${SCRIPTSDIR}/WallpaperDaemon.sh" ]]; then
