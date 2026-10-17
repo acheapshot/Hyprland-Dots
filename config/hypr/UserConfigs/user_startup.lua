@@ -94,6 +94,8 @@ local startup_commands = {
   "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user restart sunshine.service",
   "coolercontrol",
   "1password --silent",
+  -- Electron creates its tray icon once; waybar (the tray host) starts later, so wait for the watcher
+  "i=0; while [ $i -lt 150 ] && ! busctl --user status org.kde.StatusNotifierWatcher >/dev/null 2>&1; do i=$((i+1)); sleep 0.2; done; exec claude-desktop --startup",
   -- Tether: start hidden in the tray (tether-gtk spawns tetherd itself)
   "tether-gtk --tray",
   -- "kdeconnect-app",
