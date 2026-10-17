@@ -12,6 +12,10 @@ RGB_MARKER="${XDG_RUNTIME_DIR:-/tmp}/gamemode-openrgb-stopped"
 CC_MARKER="${XDG_RUNTIME_DIR:-/tmp}/gamemode-coolercontrol-stopped"
 
 start_whisper() {
+    # Skip if a daemon is already running, even one the pidfile no longer tracks
+    if pgrep -u "$USER" -f "^[^ ]*python[^ ]* [^ ]*/faster-whisper-dictation start" >/dev/null; then
+        return
+    fi
     # Stale daemon.pid survives reboot; a reused PID makes `start` exit as "already running"
     rm -f "$WHISPER_DIR/daemon.pid"
     LD_LIBRARY_PATH="$UV_SITE/nvidia/cublas/lib:$UV_SITE/nvidia/cudnn/lib" \
