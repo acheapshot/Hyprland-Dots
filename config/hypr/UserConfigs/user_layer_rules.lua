@@ -48,3 +48,12 @@ local apply_layer_rule = user_layer_rules_helper.apply_layer_rule
 --   blur = true,
 --   ignore_alpha = 0,
 -- })
+
+-- Frosted blur behind the Waybar islands (Liquid-Glass.css).
+-- ignore_alpha keeps the transparent gaps between islands unblurred.
+apply_layer_rule({
+  name = "user-waybar-blur",
+  match = { namespace = "waybar" },
+  blur = true,
+  ignore_alpha = 0.2,
+})

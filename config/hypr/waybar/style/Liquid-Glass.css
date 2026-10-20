@@ -1,0 +1,164 @@
+/* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */
+/*  Liquid Glass - Dank islands as frosted glass, wallust colors.
+    Pair with configs/RIGHT-EastWing-Dank
+    Needs the `waybar` layer rule (blur, ignore_alpha 0.2) in
+    UserConfigs/user_layer_rules.lua so Hyprland blurs behind the islands */
+
+@import '../../../.config/hypr/waybar/wallust/colors-waybar.css';
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: bold;
+  min-height: 0;
+  font-size: 99%;
+  font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+}
+
+/* The bar itself is invisible: only the islands are drawn */
+window#waybar {
+  background-color: transparent;
+  color: @foreground;
+  border: none;
+  font-size: 14px;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+
+tooltip {
+  background: alpha(@background, 0.95);
+  border-radius: 12px;
+  border: 1px solid alpha(@foreground, 0.12);
+}
+
+tooltip label {
+  color: @foreground;
+  font-size: 14px;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  padding: 0px;
+}
+
+/*----- Islands: frosted glass, blur comes from the Hyprland layer rule -----*/
+#custom-menu,
+#workspaces,
+#clock,
+#tray,
+#dank-controls,
+#dank-notify,
+#custom-power_vertical {
+  background-color: alpha(@background, 0.28);
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.20) 0%,
+    rgba(255, 255, 255, 0.05) 45%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  /* brighter top/left rim fakes the specular edge */
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-top-color: rgba(255, 255, 255, 0.38);
+  border-left-color: rgba(255, 255, 255, 0.28);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 4px 14px rgba(0, 0, 0, 0.25);
+  padding: 6px 2px;
+  /* keep a small gap between the islands and tiled windows */
+  margin-left: 4px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+/* Launcher: round button like DMS's app-drawer icon */
+#custom-menu {
+  padding: 8px 2px;
+  font-size: 16px;
+}
+
+/*----- Workspaces: dots, active one stretched into a tall pill -----*/
+#workspaces {
+  padding: 8px 0px;
+}
+
+#workspaces button {
+  min-width: 8px;
+  min-height: 8px;
+  padding: 0px;
+  margin: 4px 12px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: none;
+  background-color: alpha(@foreground, 0.35);
+  transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+
+#workspaces button label {
+  font-size: 0px;
+  padding: 0px;
+}
+
+#workspaces button.empty {
+  background-color: alpha(@foreground, 0.15);
+}
+
+#workspaces button:hover {
+  background-color: alpha(@foreground, 0.6);
+}
+
+#workspaces button.active {
+  min-height: 26px;
+  background-color: @foreground;
+}
+
+#workspaces button.urgent {
+  background-color: #f38ba8;
+}
+
+/*----- Clock: large stacked hour / minute -----*/
+#clock {
+  font-size: 16px;
+  padding: 8px 2px;
+}
+
+/*----- Individual modules: tight so the bar stays narrow -----*/
+#tray,
+#idle_inhibitor,
+#backlight,
+#pulseaudio,
+#submap,
+#custom-hypr_layout,
+#custom-light_dark,
+#custom-nightlight,
+#custom-swaync,
+#custom-dot_update,
+#custom-power_vertical {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tray {
+  padding: 8px 2px;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#submap {
+  background-color: alpha(@foreground, 0.07);
+  border-radius: 14px;
+  margin-top: 6px;
+}
+
+/*----- Indicators -----*/
+#idle_inhibitor.activated {
+  color: #39ff14;
+}
+
+#pulseaudio.muted {
+  color: #cc3436;
+}

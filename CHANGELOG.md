@@ -13,6 +13,9 @@
 ## Added:
 
 - `AGENTS.md` project rules for AI agents
+- `Liquid-Glass.css` Waybar style, frosted glass islands
+  - Pairs with `RIGHT-EastWing-Dank`
+  - Needs the `waybar` blur rule in `user_layer_rules.lua`
 
 ## Update: 
   - To make easier to find I updated descriptions for: 
