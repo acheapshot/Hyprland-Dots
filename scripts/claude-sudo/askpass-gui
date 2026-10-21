@@ -1,0 +1,12 @@
+#!/bin/sh
+# GUI askpass helper for sudo -A
+: "${XDG_RUNTIME_DIR:=/run/user/$(id -u)}"
+export XDG_RUNTIME_DIR
+if [ -z "$WAYLAND_DISPLAY" ]; then
+    for s in "$XDG_RUNTIME_DIR"/wayland-*; do
+        case "$s" in *.lock|*.sock) continue ;; esac
+        [ -S "$s" ] && WAYLAND_DISPLAY=$(basename "$s") && break
+    done
+fi
+export WAYLAND_DISPLAY
+exec zenity --password --title="Claude Code needs sudo" 2>/dev/null

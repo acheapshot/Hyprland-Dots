@@ -1,0 +1,25 @@
+#!/bin/sh
+# PreToolUse hook: block plain sudo (without -A) in Bash commands
+cmd=$(jq -r '.tool_input.command // empty')
+[ -z "$cmd" ] && exit 0
+# one sudo invocation per line, starting at the sudo word
+invocations=$(printf '%s\n' "$cmd" \
+    | sed 's/[;&|`()]/\n/g' \
+    | sed -n 's/^\(.*[[:space:]]\)\{0,1\}sudo\([[:space:]].*\)\{0,1\}$/sudo\2/p')
+[ -z "$invocations" ] && exit 0
+printf '%s\n' "$invocations" | while IFS= read -r line; do
+    ok=1
+    for w in $line; do
+        case "$w" in
+            sudo) continue ;;
+            --askpass) ok=0; break ;;
+            -*A*) ok=0; break ;;
+            -*) continue ;;
+            *) break ;;
+        esac
+    done
+    [ "$ok" = 1 ] && exit 3
+done
+[ $? -eq 3 ] || exit 0
+echo "Use 'sudo -A' (GUI askpass) instead of plain sudo." >&2
+exit 2
