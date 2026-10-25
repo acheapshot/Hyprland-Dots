@@ -12,6 +12,9 @@
 
 ## Updated:
 
+- `sddm_wallpaper_random.sh` prefers generated wallpapers
+  - Picks only from `wallpapers/ai-login` when it has images
+  - Falls back to the full collection when it is empty
 - `GameModeHook.sh` stops ComfyUI in game mode
   - It restarts afterwards only if it was running before
 
