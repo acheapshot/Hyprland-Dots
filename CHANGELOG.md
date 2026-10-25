@@ -1,5 +1,22 @@
 # Changelog — KoolDots
 
+## v2.3.27.8
+
+## Added:
+
+- `SddmWallpaperGen.sh` generates login wallpapers with ComfyUI
+  - Saves SDXL images to `~/Pictures/wallpapers/ai-login`
+  - `sddm_wallpaper_random.sh` already picks them up
+  - Skips in game mode or when the GPU is low on free VRAM
+  - Optional, needs ComfyUI at `~/ComfyUI` and `~/.local/bin/comfyui`
+
+## Updated:
+
+- `GameModeHook.sh` stops ComfyUI in game mode
+  - It restarts afterwards only if it was running before
+
+---
+
 ## v2.3.27.7
 
 ## Fixed:
