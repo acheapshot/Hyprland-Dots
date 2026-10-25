@@ -2,7 +2,7 @@
 # Called by scripts/GameMode.sh with "on" or "off".
 # "start-whisper", "start-openrgb" and "start-coolercontrol" are used by user_startup.lua at login.
 # Frees the whisper dictation model (~4 GB VRAM) while gaming,
-# and stops OpenRGB and the CoolerControl UI (coolercontrold keeps the fan curves). Each is restarted afterwards only if it was running before.
+# and stops OpenRGB, the CoolerControl UI (coolercontrold keeps the fan curves) and ComfyUI. Each is restarted afterwards only if it was running before.
 
 WHISPER="$HOME/.local/bin/faster-whisper-dictation"
 WHISPER_DIR="$HOME/.config/faster-whisper-dictation"
@@ -10,6 +10,8 @@ UV_SITE="$HOME/.local/share/uv/tools/faster-whisper-dictation/lib/python3.14/sit
 MARKER="${XDG_RUNTIME_DIR:-/tmp}/gamemode-whisper-stopped"
 RGB_MARKER="${XDG_RUNTIME_DIR:-/tmp}/gamemode-openrgb-stopped"
 CC_MARKER="${XDG_RUNTIME_DIR:-/tmp}/gamemode-coolercontrol-stopped"
+COMFY_MARKER="${XDG_RUNTIME_DIR:-/tmp}/gamemode-comfyui-stopped"
+COMFY_PATTERN="ComfyUI/main\\.py --listen"
 
 start_whisper() {
     # Skip if a daemon is already running, even one the pidfile no longer tracks
@@ -28,6 +30,10 @@ start_openrgb() {
 
 start_coolercontrol() {
     setsid coolercontrol >/dev/null 2>&1 &
+}
+
+start_comfyui() {
+    setsid "$HOME/.local/bin/comfyui" >/dev/null 2>&1 &
 }
 
 case "$1" in
@@ -50,6 +56,9 @@ on)
     if pkill -x coolercontrol; then
         touch "$CC_MARKER"
     fi
+    if pkill -u "$USER" -f "$COMFY_PATTERN"; then
+        touch "$COMFY_MARKER"
+    fi
     ;;
 off)
     if [[ -f "$MARKER" ]]; then
@@ -63,6 +72,10 @@ off)
     if [[ -f "$CC_MARKER" ]]; then
         rm -f "$CC_MARKER"
         start_coolercontrol
+    fi
+    if [[ -f "$COMFY_MARKER" ]]; then
+        rm -f "$COMFY_MARKER"
+        start_comfyui
     fi
     ;;
 esac
