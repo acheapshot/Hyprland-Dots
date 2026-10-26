@@ -17,6 +17,10 @@
   - Falls back to the full collection when it is empty
 - `GameModeHook.sh` stops ComfyUI in game mode
   - It restarts afterwards only if it was running before
+- Login no longer picks a random wallpaper
+  - `startup.lua` runs `WallpaperDaemon.sh` again
+  - It restores the previous session's wallpapers
+  - `CTRL ALT W` still randomizes every monitor
 
 ---
 
