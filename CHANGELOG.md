@@ -22,6 +22,13 @@
   - It restores the previous session's wallpapers
   - `CTRL ALT W` still randomizes every monitor
 
+## Removed:
+
+- `special_scale_factor` from the `dwindle` settings in `settings.lua`
+  - Hyprland 0.57 deprecated it and no longer applies it
+  - Windows on special workspaces now keep their full size
+  - Use a workspace rule such as `gaps_out` to shrink them
+
 ---
 
 ## v2.3.27.7
