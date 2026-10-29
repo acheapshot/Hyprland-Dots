@@ -399,13 +399,6 @@ local function layout_cycle(direction)
   end
 end
 
-local function layout_focus(direction)
-  local actions = rawget(_G, "KOOLDOTS_WINDOW_ACTIONS")
-  if actions and actions.layout_focus then
-    actions.layout_focus(direction)
-  end
-end
-
 local function bind(mods, key, fn, opts)
   local seen = {}
   for _, key_variant in ipairs(key_variants(key, mods)) do
