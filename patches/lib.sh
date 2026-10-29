@@ -56,6 +56,10 @@ patch_ensure_line_after() {
   fi
 
   if ! grep -qE "$anchor_re" "$file" 2>/dev/null; then
+    # A file without a trailing newline would glue the line onto its last one.
+    if [ -s "$file" ] && [ -n "$(tail -c1 "$file")" ]; then
+      printf '\n' >>"$file"
+    fi
     printf '%s\n' "$line" >>"$file"
     return 0
   fi

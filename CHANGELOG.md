@@ -2,6 +2,13 @@
 
 ## v2.3.28.1
 
+## Fixed:
+
+- Updater no longer breaks `kitty.conf` when it lacks a trailing newline
+  - `patch_ensure_line_after` appended onto the last line
+  - It now adds the missing newline first
+  - Kitty no longer reports `Invalid color name` after an update
+
 ## Added:
 
 - `SddmWallpaperGen.sh` generates login wallpapers with ComfyUI
