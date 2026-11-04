@@ -1,5 +1,41 @@
 # Changelog — KoolDots
 
+## v2.3.28.2
+
+## Fixed:
+
+- Clients that need an alpha buffer start again, e.g. `kitty` on a VM
+  - `quirks:skip_non_kms_dmabuf_formats` now defaults to `false`
+  - The old default advertised only the display's scanout formats
+  - On `virtio-gpu` (VirGL) that left only `XRGB8888`
+  - So no alpha `EGLConfig` existed for `kitty` to use
+  - `kitty` failed with `EGL: No EGLConfigs returned`
+  - GLFW asks for `EGL_ALPHA_SIZE 8`, which no offered config had
+  - `lua/settings.lua` sets `skip_non_kms_dmabuf_formats = false`
+  - Existing installs get it from the refreshed system config, no patch
+
+## Updated:
+
+- `hl.meta.lua` refreshed to the stub Hyprland 0.57.0 ships
+  - It is generated upstream by `meta/generateLuaStubs.py`
+  - The installed copy is `/usr/share/hypr/stubs/hl.meta.lua`
+  - The vendored copy was 1252 lines; the shipped stub is 2015
+  - Editors flagged `decoration.wobble.*`, which the dots already set
+  - New `HL.ConfigOpt` tree types `hl.config({ ... })` as well
+
+## Removed:
+
+- Deprecated `dwindle.special_scale_factor` setting
+  - `hyprctl deprecated-config` flags it on Hyprland 0.57
+  - The special workspace is inset with a workspace rule instead
+  - The rule is a system default in `lua/workspaces.lua`
+  - Override it with a rule in `UserConfigs/workspaces.lua`
+  - `gaps_out` is absolute pixels, unlike the old `0.8` factor
+  - Raise `gaps_out` on a display larger than 1080p
+  - `special:scratchpad` needs no rule: the dropdown terminal is floating
+
+---
+
 ## v2.3.28.1
 
 ## Fixed:
@@ -8,6 +44,17 @@
   - `patch_ensure_line_after` appended onto the last line
   - It now adds the missing newline first
   - Kitty no longer reports `Invalid color name` after an update
+- `unbind(...)` works on installs older than v2.3.26.2
+  - v2.3.24 to v2.3.26.1 shipped a `user_keybinds.lua` with only `bind` in it
+  - The helper exported `unbind` and `dispatch`, the template never pulled them
+  - A call was `attempt to call a nil value`, which aborts the whole file
+  - `user_overrides.lua` reports that as one `[WARN]`, so the key looked inert
+  - A hand-written `pcall(hl.unbind, ...)` worked, bypassing the helper
+  - So the helper read as having no `unbind` at all, which is what was reported
+  - `copy.sh` only ADDS missing `UserConfigs` files, so v2.3.26.2 never arrived
+  - `patches/90-user-keybinds-helper-locals.sh` adds the two missing lines
+  - It adds them after the helper lines the file already has, and nothing else
+  - Issue: [#164](https://github.com/LinuxBeginnings/Hyprland-Dots/issues/164)
 
 ## Added:
 
