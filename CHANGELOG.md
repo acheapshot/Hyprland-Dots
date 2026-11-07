@@ -1,5 +1,21 @@
 # Changelog — KoolDots
 
+## v2.3.29
+
+## Added:
+
+- `HDRGame.sh` turns on HDR only while a game is fullscreen
+  - Wine on Wayland offers HDR only if the monitor is already in HDR
+  - Hyprland waits for the game to ask first, so the option stayed greyed out
+  - The script sets `cm = "hdr"` when a game goes fullscreen on a monitor
+  - It sets `cm = "srgb"` again when the game leaves fullscreen or closes
+  - Games are windows matching `steam_app_*`, `*.exe` or `gamescope`
+  - Override the match with `HDR_GAME_CLASS_REGEX`
+  - `mpv` and other HDR clients still use `render.cm_auto_hdr`
+  - Start it from `user_startup.lua`
+  - Steam launch options: `PROTON_ENABLE_WAYLAND=1 PROTON_ENABLE_HDR=1 %command%`
+  - Use Proton-GE, since Proton Experimental stayed on X11
+
 ## v2.3.28.2
 
 ## Fixed:
