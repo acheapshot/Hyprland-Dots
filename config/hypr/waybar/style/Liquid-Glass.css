@@ -162,3 +162,26 @@ tooltip label {
 #pulseaudio.muted {
   color: #cc3436;
 }
+
+/*----- Equal width: every island matches the widest one -----*/
+#custom-menu,
+#workspaces,
+#clock,
+#tray,
+#dank-controls,
+#dank-notify,
+#custom-power_vertical {
+  min-width: 28px;
+}
+
+/*----- Glyph centring: these Nerd Font icons have a wide advance box, so
+  the ink sits left of centre. Left padding nudges it back -----*/
+#custom-light_dark,
+#custom-hypr_layout,
+#custom-swaync {
+  padding-left: 9px;
+}
+
+#custom-nightlight {
+  padding-left: 7px;
+}
