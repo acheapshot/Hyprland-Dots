@@ -26,7 +26,6 @@
 #
 # Usage:
 #   sddm_wallpaper_random.sh            pick random wallpaper + recolor
-#                                       (only from wallpapers/ai-login when it has images)
 #   sddm_wallpaper_random.sh --prime    precompute palettes for every
 #                                       wallpaper (no theme change)
 #   SDDM_WALLPAPER=/path/img.jpg sddm_wallpaper_random.sh
@@ -209,13 +208,7 @@ fi
 if [[ -n "${SDDM_WALLPAPER:-}" && -f "$SDDM_WALLPAPER" ]]; then
     random_wallpaper="$SDDM_WALLPAPER"
 else
-    # Prefer generated wallpapers (SddmWallpaperGen.sh) over the full collection
-    pool=()
-    for img in "${WALLPAPERS[@]}"; do
-        [[ "$img" == "$wallDIR/ai-login/"* ]] && pool+=("$img")
-    done
-    [[ ${#pool[@]} -eq 0 ]] && pool=("${WALLPAPERS[@]}")
-    random_wallpaper="${pool[$((RANDOM % ${#pool[@]}))]}"
+    random_wallpaper="${WALLPAPERS[$((RANDOM % ${#WALLPAPERS[@]}))]}"
 fi
 
 if cp -f "$random_wallpaper" "$sddm_simple/Backgrounds/default" 2>/dev/null; then
