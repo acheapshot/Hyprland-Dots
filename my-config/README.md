@@ -1,9 +1,10 @@
 # my-config
 
-Personal copies of live `~/.config/hypr` files that are not part of the
-shipped dots. Backup only; nothing here is loaded or installed by `copy.sh`.
+Personal copies of live `~/.config/hypr` files. Backup only; nothing here is
+loaded or installed by `copy.sh`.
 
-- `UserConfigs/user_window_rules.lua`: games to DP-3, workspace 2, fullscreen;
-  Steam `Launching...` popup hidden
+- `UserConfigs/`: copy of the live `~/.config/hypr/UserConfigs`
+- `UserScripts/`: copy of the live `~/.config/hypr/UserScripts`
 
-Restore: copy the file back to `~/.config/hypr/UserConfigs/`.
+Update: run `./sync.sh`, then commit and push to `me`.
+Restore: copy a folder back to `~/.config/hypr/`.
