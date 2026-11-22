@@ -1,5 +1,17 @@
 # Changelog — KoolDots
 
+## v2.3.28.4
+
+## Fixed:
+
+- Game windows are tagged `games` again
+  - `window_rules.lua` had `\\\\d` in the `steam_app_` class pattern
+  - That matched a literal backslash, so no Steam game matched
+  - The pattern is now `steam_app_\\d+`
+  - `no_blur` and `fullscreen = 0` now apply to Steam games
+
+---
+
 ## v2.3.28.3
 
 ## Fixed:
