@@ -137,12 +137,10 @@ apply_wallpaper_for_monitor() {
   if [ -n "$wallpaper_path" ] && [ -f "$wallpaper_path" ]; then
     local resize_mode
     resize_mode="$(wallpaper_resize_mode "$wallpaper_path" "$monitor")"
-    # Output may not be ready right after DPMS/resume, so retry before giving up
-    local attempt
-    for attempt in 1 2 3 4 5 6; do
-      "$WWW_CMD" img -o "$monitor" --resize "$resize_mode" "$wallpaper_path" >/dev/null 2>&1 && break
-      sleep 0.5
-    done
+    if ! "$WWW_CMD" img -o "$monitor" --resize "$resize_mode" "$wallpaper_path" >/dev/null 2>&1; then
+      sleep 0.3
+      "$WWW_CMD" img -o "$monitor" --resize "$resize_mode" "$wallpaper_path" >/dev/null 2>&1 &
+    fi
     printf '%s\n' "$wallpaper_path"
     return 0
   fi

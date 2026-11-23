@@ -4,10 +4,6 @@
 
 ## Fixed:
 
-- Second monitor wallpaper and Waybar colors survive wake from sleep
-  - `WallpaperDaemon.sh` gave up on a monitor that was not ready yet
-  - That left it black and themed Waybar from the other monitor's image
-  - Applying a wallpaper now retries for a few seconds
 - Game windows are tagged `games` again
   - `window_rules.lua` had `\\\\d` in the `steam_app_` class pattern
   - That matched a literal backslash, so no Steam game matched
