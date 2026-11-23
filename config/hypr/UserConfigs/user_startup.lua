@@ -92,7 +92,6 @@ local startup_commands = {
   -- Sunshine starts via systemd --user before WAYLAND_DISPLAY is imported, so it boots with no
   -- display/encoder. exec_once runs commands in parallel, so import here ourselves before restarting.
   "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user restart sunshine.service",
-  "coolercontrol",
   "1password --silent",
   -- Electron creates its tray icon once; waybar (the tray host) starts later, so wait for the watcher
   "i=0; while [ $i -lt 150 ] && ! busctl --user status org.kde.StatusNotifierWatcher >/dev/null 2>&1; do i=$((i+1)); sleep 0.2; done; exec claude-desktop --startup",

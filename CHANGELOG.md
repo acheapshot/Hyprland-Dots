@@ -4,10 +4,10 @@
 
 ## Fixed:
 
-- CoolerControl no longer opens when leaving game mode
+- CoolerControl no longer opens at login or when leaving game mode
   - The UI has no start-minimized flag
-  - `GameModeHook.sh` still stops it on entry
-  - It is no longer relaunched on exit
+  - It is removed from `user_startup.lua`
+  - `GameModeHook.sh` no longer starts or stops it
 - Monitor wallpaper and Waybar colors are restored after wake from sleep
   - A monitor can reconnect after the wake hook has already run
   - The wallpaper daemon paints a reconnected output black

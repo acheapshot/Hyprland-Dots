@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 # Called by scripts/GameMode.sh with "on" or "off".
-# "start-whisper", "start-openrgb" and "start-coolercontrol" are used by user_startup.lua at login.
+# "start-whisper" and "start-openrgb" are used by user_startup.lua at login.
 # Frees the whisper dictation model (~4 GB VRAM) while gaming,
-# and stops OpenRGB and the CoolerControl UI. Whisper and OpenRGB are restarted afterwards only if they were running before; the CoolerControl UI is not (it has no start-minimized flag and would pop open).
+# and stops OpenRGB. Each is restarted afterwards only if it was running before.
 
 WHISPER="$HOME/.local/bin/faster-whisper-dictation"
 WHISPER_DIR="$HOME/.config/faster-whisper-dictation"
 UV_SITE="$HOME/.local/share/uv/tools/faster-whisper-dictation/lib/python3.14/site-packages"
 MARKER="${XDG_RUNTIME_DIR:-/tmp}/gamemode-whisper-stopped"
 RGB_MARKER="${XDG_RUNTIME_DIR:-/tmp}/gamemode-openrgb-stopped"
-CC_MARKER="${XDG_RUNTIME_DIR:-/tmp}/gamemode-coolercontrol-stopped"
 
 start_whisper() {
     # Skip if a daemon is already running, even one the pidfile no longer tracks
@@ -26,19 +25,12 @@ start_openrgb() {
     setsid openrgb --startminimized --profile "Direct" >/dev/null 2>&1 &
 }
 
-start_coolercontrol() {
-    setsid coolercontrol >/dev/null 2>&1 &
-}
-
 case "$1" in
 start-whisper)
     start_whisper
     ;;
 start-openrgb)
     start_openrgb
-    ;;
-start-coolercontrol)
-    start_coolercontrol
     ;;
 on)
     if "$WHISPER" status 2>/dev/null | grep -q "^Status: running"; then
@@ -47,8 +39,6 @@ on)
     if pkill -x openrgb; then
         touch "$RGB_MARKER"
     fi
-    # The UI has no start-minimized flag, so it is not relaunched on "off"
-    pkill -x coolercontrol
     ;;
 off)
     if [[ -f "$MARKER" ]]; then
@@ -59,6 +49,5 @@ off)
         rm -f "$RGB_MARKER"
         start_openrgb
     fi
-    rm -f "$CC_MARKER"
     ;;
 esac
