@@ -9,7 +9,6 @@
   - The wallpaper daemon paints a reconnected output black
   - Waybar was then themed from the other monitor's wallpaper
   - New `WallpaperHotplug.sh` re-applies both on `monitor.added`
-
 - Game windows are tagged `games` again
   - `window_rules.lua` had `\\\\d` in the `steam_app_` class pattern
   - That matched a literal backslash, so no Steam game matched
