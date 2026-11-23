@@ -83,8 +83,22 @@ local function run_startup_commands()
   end
 end
 
+-- A monitor that reconnects (e.g. after S3 resume) is a new output to the
+-- wallpaper daemon and comes up black. Re-apply once startup has run, so the
+-- initial monitor.added events at login do not duplicate the startup pass.
+local startup_done = false
+local function on_monitor_added()
+  if startup_done then
+    hl.exec_cmd(scriptsDir .. "/WallpaperHotplug.sh")
+  end
+end
+
 if hl and hl.on then
-  hl.on("hyprland.start", run_startup_commands)
+  hl.on("hyprland.start", function()
+    run_startup_commands()
+    startup_done = true
+  end)
+  hl.on("monitor.added", on_monitor_added)
 else
   -- Compatibility fallback for older/limited runtimes without hl.on.
   run_startup_commands()
