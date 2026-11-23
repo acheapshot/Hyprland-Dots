@@ -2,7 +2,7 @@
 # Called by scripts/GameMode.sh with "on" or "off".
 # "start-whisper", "start-openrgb" and "start-coolercontrol" are used by user_startup.lua at login.
 # Frees the whisper dictation model (~4 GB VRAM) while gaming,
-# and stops OpenRGB and the CoolerControl UI (coolercontrold keeps the fan curves). Whisper and OpenRGB are restarted afterwards only if they were running before; the CoolerControl UI is not (it has no start-minimized flag and would pop open).
+# and stops OpenRGB and the CoolerControl UI. Whisper and OpenRGB are restarted afterwards only if they were running before; the CoolerControl UI is not (it has no start-minimized flag and would pop open).
 
 WHISPER="$HOME/.local/bin/faster-whisper-dictation"
 WHISPER_DIR="$HOME/.config/faster-whisper-dictation"
